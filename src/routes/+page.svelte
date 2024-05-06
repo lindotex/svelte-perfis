@@ -1,2 +1,23 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    import Titulo from "../components/Titulo.svelte";
+    let name = 'Alisson'
+</script>
+<div class="app">
+    <header>
+        <Titulo/>
+    </header>
+</div>
+
+<style>
+    .app {
+    max-height: 100vh;
+  }
+
+  header {    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+ 
+</style>
