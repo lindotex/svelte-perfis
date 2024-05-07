@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import type IUsuario from "../Interfaces/IUsuario";
+  import { buscaRepositorios, buscaUsuario } from "../requisicoes";
 
   let valorInput = "";
   let statusDeErro: null | number = null;
@@ -9,13 +10,14 @@
   }>();
 
   async function aoSubmeter() {
-    const respostaUsuario = await fetch(
-      `https://api.github.com/users/${valorInput}`
-    );
+    const respostaUsuario = await buscaUsuario(valorInput);
+    const respostaRepositorios = await buscaRepositorios(valorInput);
 
-    if (respostaUsuario.ok) {
+    if (respostaUsuario.ok && respostaRepositorios.ok) {
       const dadosUsuario = await respostaUsuario.json();
+      const dadosRepositorios =await respostaRepositorios.json()
 
+      console.log(dadosRepositorios)
       dispatch("aoAlterarUsuario", {
         avatar_url: dadosUsuario.avatar_url,
         login: dadosUsuario.login,
