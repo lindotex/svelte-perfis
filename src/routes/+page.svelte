@@ -1,61 +1,40 @@
 <script lang="ts">
-    import BarraSuperior from "../components/BarraSuperior.svelte";
     import Titulo from "../components/Titulo.svelte";
+    import Usuario from "../components/Usuario.svelte";
     import type IUsuario from '../Interfaces/IUsuario';
-    let value = ''
+    let valorInput = ''
+    var usuario :IUsuario | null = null;
     
-    function aoSubmeter(){
-      console.log(value)
+    async function aoSubmeter(){
+      const respostaUsuario = await fetch(`https://api.github.com/users/${valorInput}`);
+      const dadosUsuario = await respostaUsuario.json();
+
+      console.log(dadosUsuario)
+       usuario = {
+        avatar_url : dadosUsuario.avatar_url,
+        login: dadosUsuario.login,
+        nome: dadosUsuario.name,
+        perfil_url: dadosUsuario.url,
+        repositorios_publicos: dadosUsuario.public_repos,
+        seguidores: dadosUsuario.followers ,      
+      };   
     }
-
-    var usuario :IUsuario = {
-      avatar_url : 'https://github.com/lindotex.png',
-      login: 'lindotex',
-      nome: 'lindotex',
-      perfil_url: 'https://github.com/lindotex',
-      repositorios_publicos: 30,
-      seguidores:20,      
-    };   
-
-
 </script>
 <div class="app">
     <header>
         <Titulo/>
         <div class="busca-usuario">
           <form action="" on:submit={aoSubmeter}>
-            <input type="text" class="input" bind:value>
+            <input type="text" class="input" bind:value={valorInput} placeholder="Pesquise pelo usuario.">
             <div class="botao-container">
               <button class="botao">Buscar</button>
             </div>
           </form>
         </div>
     </header>
-
-    <BarraSuperior/>
-
-    <div class="usuario">
-      <div class="foto-container">
-        <a href={usuario.perfil_url} target="_blank" rel="noopener">
-          <div class="foto-usuario" 
-          style:background-image='url({usuario.avatar_url})'></div>
-        </a>
-      </div>
-      <div class="detalhes-usuario">
-        <div class="info">
-          Nome: <span>{usuario.nome}</span>
-        </div>
-        <div class="info">
-          Usuario: <span>{usuario.login}</span>
-        </div>
-        <div class="info">
-          Seguidores: <span>{usuario.seguidores}</span>
-        </div>
-        <div class="info">
-          Repositorios: <span>{usuario.seguidores}</span>
-        </div>
-      </div>
-    </div>
+    {#if usuario}
+      <Usuario usuario={usuario}/>
+    {/if}
 </div>
 
 <style>
@@ -122,46 +101,5 @@
     background: #4590ff;
   }
 
-  .card-usuario {
-    margin-top: 65px;
-  }
-
-  .usuario {
-    padding: 28px 0;
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: -12px 37px 45px rgba(133, 127, 201, 0.18);
-    border-radius: 0px 0px 13px 13px;
-
-    display: flex;
-    justify-content: center;
-  }
-
-  .foto-container {
-    margin-right: 81px;
-  }
-
-  .foto-usuario {
-    width: 12.75rem;
-    height: 12.75rem;
-    border: 4.56px solid #2e80fa;
-    border-radius: 50%;
-    background-size: cover;
-  }
-
-  .detalhes-usuario {
-    margin-right: 55px;
-  }
-
-  .detalhes-usuario > .info {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 31px;
-    color: #395278;
-  }
-
-  .detalhes-usuario > .info > span {
-    color: #6781a8;
-    font-weight: normal;
-  }
  
 </style>
