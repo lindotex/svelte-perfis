@@ -3,6 +3,8 @@
     import BarraSuperior from './BarraSuperior.svelte';
     export let usuario: IUsuario
 
+    $: temRepositorios = Boolean(usuario.repositorios_recentes.length);
+    
 </script>
 
 <div class="card-usuario">
@@ -31,6 +33,22 @@
             Repositorios: <span>{usuario.seguidores}</span>
           </div>
         </div>
+        {#if temRepositorios}
+          <div class="repositorios">
+            <h2 class="titulo">Repositorios recentes</h2>
+            <ul>
+              {#each usuario.repositorios_recentes as repositorio}
+              <li>
+                <a href={repositorio.url}
+                target="_blank"
+                rel='noopener'
+                class="repositorio"
+                >{repositorio.nome}</a>
+              </li>
+              {/each}
+            </ul>
+          </div>
+        {/if}
       </div>
 </div>
 
@@ -75,6 +93,21 @@
   .detalhes-usuario > .info > span {
     color: #6781a8;
     font-weight: normal;
+  }
+  .repositorios > .titulo {
+    font-size: 20px;
+    line-height: 31px;
+    font-weight: 600;
+    color: #395278;
+  }
+  .repositorio {
+    text-align: start;
+    font-size: 20px;
+    line-height: 31px;
+    color: #6781a8;
+    transition: color 0.2s;    
+    text-decoration: none;
+    list-style: none;
   }
  
   </style>

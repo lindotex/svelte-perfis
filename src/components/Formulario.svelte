@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import type IUsuario from "../Interfaces/IUsuario";
   import { buscaRepositorios, buscaUsuario } from "../requisicoes";
+  import montaUsuario from '../utils/montaUsuario';
 
   let valorInput = "";
   let statusDeErro: null | number = null;
@@ -16,16 +17,8 @@
     if (respostaUsuario.ok && respostaRepositorios.ok) {
       const dadosUsuario = await respostaUsuario.json();
       const dadosRepositorios =await respostaRepositorios.json()
-
-      console.log(dadosRepositorios)
-      dispatch("aoAlterarUsuario", {
-        avatar_url: dadosUsuario.avatar_url,
-        login: dadosUsuario.login,
-        nome: dadosUsuario.name,
-        perfil_url: dadosUsuario.url,
-        repositorios_publicos: dadosUsuario.public_repos,
-        seguidores: dadosUsuario.followers,
-      });
+      
+      dispatch("aoAlterarUsuario", montaUsuario(dadosUsuario, dadosRepositorios));
       statusDeErro = null;
     } else {
       statusDeErro = respostaUsuario.status;
@@ -44,7 +37,9 @@
       placeholder="Pesquise pelo usuario."
     />
     <div class="botao-container">
-      <button class="botao">Buscar</button>
+      <button class="botao" type="submit">
+        Buscar
+      </button>
     </div>
     {#if statusDeErro === 404}
       <span class="erro">Usuario nao encontrado...</span>
@@ -85,7 +80,20 @@
     bottom: 0;
     display: flex;
   }
-
+  .erro {
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    z-index: -1;
+    color: #ff003e;
+  }
+  .erro-input {
+    border: 1px solid #ff003e;
+  }
   .botao {
     padding: 15px 24px;
     border-radius: 8px;
@@ -106,18 +114,5 @@
   .botao:hover {
     background: #4590ff;
   }
-  .erro {
-    position: absolute;
-    bottom: -25px;
-    left: 0;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
-    z-index: -1;
-    color: #ff003e;
-  }
-  .erro-input {
-    border: 1px solid #ff003e;
-  }
+  
 </style>
