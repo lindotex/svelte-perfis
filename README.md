@@ -1,6 +1,3 @@
-[PROJECT__BADGE]: https://img.shields.io/badge/📱Visit_this_project-000?style=for-the-badge&logo=project
-[PROJECT__URL]: https://github.com/Fernanda-Kipper/Readme-Templates
-
 <h1 align="center" style="font-weight: bold;">Github Profile Searcher 💻</h1>
 
 ![Svelte](https://img.shields.io/badge/svelte-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white)
@@ -9,14 +6,12 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
 <p align="center">
-    <a href="#about">About</a> • 
-    <a href="#started">Getting Started</a> • 
-    <a href="#colab">Collaborators</a> •
-    <a href="#contribute">Contribute</a>
+    <a href="#about">About</a> 
+    <a href="#started">Getting Started</a> 
 </p>
 
 <p align="center">
-    <img src="../svelte-perfis/static/exemplo.png" alt="Image Example" width="400px">
+    <img src="/static/exemplo.png" alt="Image Example" width="800px">
 </p>
 
 <h2 id="started">📌 About</h2>
@@ -54,3 +49,6 @@ cd svelte-perfis # to enter at the aplication folder
 npm install # To install all dependencies at package.json
 npm run -- --open #This is the command to run svelte
 ```
+
+[PROJECT__BADGE]: https://img.shields.io/badge/📱Visit_this_project-000?style=for-the-badge&logo=project
+[PROJECT__URL]: https://github.com/lindotex/svelte-perfis
