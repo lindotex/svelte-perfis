@@ -1,0 +1,3 @@
+{
+    "prepare": "svelte-kit sync",
+}
