@@ -7,6 +7,10 @@
   import Titulo from "../components/Titulo.svelte";
   import Usuario from "../components/Usuario.svelte";
   import type IUsuario from '../Interfaces/IUsuario';
+  import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+
+  injectSpeedInsights();
+
   var usuario :IUsuario | null = null;
 
   function definirUsuario(evento:CustomEvent<IUsuario | null>){
