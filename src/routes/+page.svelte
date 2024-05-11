@@ -1,4 +1,8 @@
 <script lang="ts">
+  /** @type {import('@sveltejs/adapter-vercel').Config} */
+  export const config = {
+    runtime: 'edge'
+  };
   import Formulario from "../components/Formulario.svelte";
   import Titulo from "../components/Titulo.svelte";
   import Usuario from "../components/Usuario.svelte";
