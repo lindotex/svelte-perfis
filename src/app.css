@@ -1,20 +1,43 @@
 * {
-    font-family: roboto;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  li {
+}
+ 
+:root {
+    --cor-fundo-body: #FEF7EC;
+    --cor-texto-principal: #444444;
+    --branco: #FAFAFA;
+    --cinza: #EAEAEA;
+    --laranja: #FF734C;
+    --verde: #41A86A;
+}
+ 
+body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--cor-texto-principal);
+   
+    min-height: 100vh;
+    background: url("/imagens/textura-marmore.png") repeat;
+    background-color: var(--cor-fundo-body);
+    background-size: 100%;
+}
+ 
+button, input, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+ 
+button {
+    border: 0;
+    background-color: transparent;
+}
+ 
+li {
     list-style: none;
-  }
-  
-  img {
-    display: block;
-  }
-  
-  body {
-    width: 100vw;
-    height: 100vh;
-    padding: 4rem 10rem;
-  }
+}
+ 
+a {
+    text-decoration: none;
+}
